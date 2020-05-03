@@ -77,6 +77,18 @@ public class Database {
         }
     }
 
+    public double getSum(String bin) {
+        Account account = accountList.stream().
+                filter(acc -> acc.getBin().equals(bin)).
+                findFirst().
+                orElse(null);
+
+        if (account == null)
+            return -1;
+
+        return account.getSum();
+    }
+
     private void load() {
         accountList = Serializer.deserializeList("accounts.out", Account.class);
 

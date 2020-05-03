@@ -11,12 +11,22 @@ import static com.mebr0.util.Scanner.ask;
  * Validating bin (Card) and pin code of {@link com.mebr0.database.Account}
  *
  * @author A.Yergali
- * @version 1.0
+ * @version 2.0
  */
 public class Start extends State {
 
-    public Start() {
+    private static State state;
+
+    private Start() {
         super(false);
+    }
+
+    public static State state() {
+        if (state == null) {
+            state = new Start();
+        }
+
+        return state;
     }
 
     @Override
@@ -26,11 +36,11 @@ public class Start extends State {
 
         if (DB.login(bin, pin)) {
             Machine.bin = bin;
-            return new Menu();
+            return Menu.state();
         }
         else {
             error("Wrong bin or pin of card");
-            return new Halt();
+            return Halt.state();
         }
     }
 }

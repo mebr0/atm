@@ -5,12 +5,22 @@ package com.mebr0.atm.state.ultra;
  * Error means exit with some errors
  *
  * @author A.Yergali
- * @version 1.0
+ * @version 2.0
  */
 public class Error extends State {
 
-    public Error() {
+    private static State state;
+
+    private Error() {
         super(true);
+    }
+
+    public static State state() {
+        if (state == null) {
+            state = new Error();
+        }
+
+        return state;
     }
 
     @Override

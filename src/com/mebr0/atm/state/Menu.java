@@ -1,6 +1,6 @@
 package com.mebr0.atm.state;
 
-import com.mebr0.atm.state.ultra.Error;
+import com.mebr0.atm.state.account.CheckAccount;
 import com.mebr0.atm.state.ultra.Halt;
 import com.mebr0.atm.state.ultra.State;
 import com.mebr0.atm.state.withdraw.WithdrawSum;
@@ -13,18 +13,28 @@ import static com.mebr0.util.Scanner.index;
  * Menu contains all options of ATM
  *
  * @author A.Yergali
- * @version 1.0
+ * @version 2.0
  */
 public class Menu extends State {
 
-    public Menu() {
+    private static State state;
+
+    private Menu() {
         super(false);
+    }
+
+    public static State state() {
+        if (state == null) {
+            state = new Menu();
+        }
+
+        return state;
     }
 
     @Override
     public State next() {
-        String[] options = { "Withdraw", "Exit" };
-        Class<?>[] classes = { WithdrawSum.class, Halt.class };
+        String[] options = { "Withdraw", "Check cash", "Exit" };
+        State[] states = { WithdrawSum.state(), CheckAccount.state(), Halt.state() };
 
         print("Choose option");
         options(options);
@@ -33,15 +43,9 @@ public class Menu extends State {
 
         if (option < 1 || option > options.length) {
             error("Invalid option");
-            return new Menu();
+            return Menu.state();
         }
 
-        try {
-            return (State) classes[option - 1].newInstance();
-        }
-        catch (InstantiationException | IllegalAccessException e) {
-            LOG.error("Cannot call empty constructor of " + classes[option - 1].getSimpleName());
-            return new Error();
-        }
+        return states[option - 1];
     }
 }
