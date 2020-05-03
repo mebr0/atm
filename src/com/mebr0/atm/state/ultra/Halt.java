@@ -1,4 +1,4 @@
-package com.mebr0.atm.state;
+package com.mebr0.atm.state.ultra;
 
 /**
  * Final state of {@link com.mebr0.atm.Machine}

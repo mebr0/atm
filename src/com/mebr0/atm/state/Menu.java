@@ -1,5 +1,10 @@
 package com.mebr0.atm.state;
 
+import com.mebr0.atm.state.ultra.Error;
+import com.mebr0.atm.state.ultra.Halt;
+import com.mebr0.atm.state.ultra.State;
+import com.mebr0.atm.state.withdraw.WithdrawSum;
+
 import static com.mebr0.util.Printer.*;
 import static com.mebr0.util.Scanner.index;
 

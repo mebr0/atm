@@ -1,8 +1,8 @@
 package com.mebr0.atm;
 
-import com.mebr0.atm.state.Start;
-import com.mebr0.atm.state.State;
-import com.mebr0.db.Database;
+import com.mebr0.atm.state.ultra.Start;
+import com.mebr0.atm.state.ultra.State;
+import com.mebr0.database.Database;
 import com.mebr0.util.Logger;
 
 /**

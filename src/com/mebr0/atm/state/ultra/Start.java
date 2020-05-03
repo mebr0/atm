@@ -1,13 +1,14 @@
-package com.mebr0.atm.state;
+package com.mebr0.atm.state.ultra;
 
 import com.mebr0.atm.Machine;
+import com.mebr0.atm.state.Menu;
 
 import static com.mebr0.util.Printer.error;
 import static com.mebr0.util.Scanner.ask;
 
 /**
  * Initial state of {@link com.mebr0.atm.Machine}
- * Validating bin (Card) and pin code of {@link com.mebr0.db.Account}
+ * Validating bin (Card) and pin code of {@link com.mebr0.database.Account}
  *
  * @author A.Yergali
  * @version 1.0

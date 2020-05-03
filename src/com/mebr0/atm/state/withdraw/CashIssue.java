@@ -1,4 +1,8 @@
-package com.mebr0.atm.state;
+package com.mebr0.atm.state.withdraw;
+
+import com.mebr0.atm.state.Menu;
+import com.mebr0.atm.state.ultra.Error;
+import com.mebr0.atm.state.ultra.State;
 
 import java.util.Random;
 
@@ -6,7 +10,7 @@ import static com.mebr0.util.Printer.*;
 
 /**
  * Intermediate state of {@link com.mebr0.atm.Machine}
- * Issue cash from {@link com.mebr0.db.Account}
+ * Issue cash from {@link com.mebr0.database.Account}
  *
  * @author A.Yergali
  * @version 1.0

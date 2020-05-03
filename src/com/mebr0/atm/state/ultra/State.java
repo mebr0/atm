@@ -1,6 +1,6 @@
-package com.mebr0.atm.state;
+package com.mebr0.atm.state.ultra;
 
-import com.mebr0.db.Database;
+import com.mebr0.database.Database;
 import com.mebr0.util.Logger;
 
 import java.util.UUID;
