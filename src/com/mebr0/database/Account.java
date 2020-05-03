@@ -31,7 +31,7 @@ public class Account implements Serializable {
 
     public double withdraw(int sum) {
         this.sum -= sum;
-        return this.sum;
+        return sum;
     }
 
     public String getBin() {

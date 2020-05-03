@@ -1,32 +1,31 @@
-package com.mebr0.atm.state.withdraw;
+package com.mebr0.atm.state.account;
 
+import com.mebr0.atm.Machine;
 import com.mebr0.atm.state.Menu;
 import com.mebr0.atm.state.ultra.Error;
 import com.mebr0.atm.state.ultra.State;
-
-import java.util.Random;
 
 import static com.mebr0.util.Printer.error;
 import static com.mebr0.util.Printer.print;
 
 /**
  * Intermediate state of {@link com.mebr0.atm.Machine}
- * Issue cash from {@link com.mebr0.database.Account}
+ * Check cash of {@link com.mebr0.database.Account}
  *
  * @author A.Yergali
- * @version 2.0
+ * @version 1.0
  */
-public class CashIssue extends State {
+public class CheckAccount extends State {
 
     private static State state;
 
-    private CashIssue() {
+    private CheckAccount() {
         super(false);
     }
 
     public static State state() {
         if (state == null) {
-            state = new CashIssue();
+            state = new CheckAccount();
         }
 
         return state;
@@ -34,17 +33,14 @@ public class CashIssue extends State {
 
     @Override
     public State next() {
-        int delay = new Random().nextInt(5) + 3;
+        double sum = DB.getSum(Machine.bin);
 
-        try {
-            Thread.sleep(delay * 1000);
-
-            print("Cash issued");
+        if (sum != -1) {
+            print("Current balance: " + sum);
             return Menu.state();
         }
-        catch (InterruptedException e) {
-            LOG.error("Thread interrupted during delay");
-            error("Interrupted");
+        else {
+            error("Error with account");
             return Error.state();
         }
     }

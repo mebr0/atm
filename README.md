@@ -15,6 +15,7 @@ Written on Java with Polymorphism form (states == classes)
 * q<sub>1</sub> - choose option in main menu
 * q<sub>2</sub> - enter sum to withdraw
 * q<sub>3</sub> - issuing cash
+* q<sub>4</sub> - output account cash
 
 #### Actions
 
@@ -24,6 +25,7 @@ Written on Java with Polymorphism form (states == classes)
 * z<sub>3</sub> - choosing to withdraw cash
 * z<sub>4</sub> - withdrawing cash
 * z<sub>5</sub> - returning to menu
+* z<sub>6</sub> - checking account
 * z<sub>99</sub> - system error
 * z<sub>100</sub> - wrong PIN
 

@@ -19,7 +19,7 @@ public class Machine {
     private final Logger LOG = Logger.getInstance();
 
     {
-        current = new Start();
+        current = Start.state();
     }
 
     public void start() {
