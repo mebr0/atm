@@ -5,7 +5,7 @@ Written on Java with Polymorphism form (states == classes)
 
 ### FSM schema
 
-![fsm](/home/mebro/Pictures/index.png)
+![fsm](fsm.png)
 
 #### States
 
