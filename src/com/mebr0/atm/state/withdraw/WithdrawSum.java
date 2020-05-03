@@ -36,9 +36,9 @@ public class WithdrawSum extends State {
         int sum = index("Enter sum to withdraw");
 
         if (DB.checkSum(Machine.bin, sum)) {
-            DB.withdrawSum(Machine.bin, sum);
+            double sumToWithdraw = DB.withdrawSum(Machine.bin, sum);
 
-            out("Wait for withdrawing " + sum + "... ");
+            out("Wait for withdrawing " + sumToWithdraw + "... ");
             return CashIssue.state();
         }
         else {
