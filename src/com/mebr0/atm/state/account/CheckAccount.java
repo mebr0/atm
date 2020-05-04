@@ -5,6 +5,7 @@ import com.mebr0.atm.state.Menu;
 import com.mebr0.atm.state.ultra.Error;
 import com.mebr0.atm.state.ultra.State;
 
+import static com.mebr0.database.Database.ERROR_SUM;
 import static com.mebr0.util.Printer.error;
 import static com.mebr0.util.Printer.print;
 
@@ -35,7 +36,7 @@ public class CheckAccount extends State {
     public State next() {
         double sum = DB.getSum(Machine.bin);
 
-        if (sum != -1) {
+        if (sum != ERROR_SUM) {
             print("Current balance: " + sum);
             return Menu.state();
         }

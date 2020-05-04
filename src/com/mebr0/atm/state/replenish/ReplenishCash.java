@@ -4,6 +4,7 @@ import com.mebr0.atm.Machine;
 import com.mebr0.atm.state.ultra.State;
 
 import static com.mebr0.util.Printer.out;
+import static com.mebr0.util.Scanner.ERROR;
 import static com.mebr0.util.Scanner.index;
 
 /**
@@ -13,17 +14,17 @@ import static com.mebr0.util.Scanner.index;
  * @author A.Yergali
  * @version 1.0
  */
-public class ReplenishSum extends State {
+public class ReplenishCash extends State {
 
     private static State state;
 
-    private ReplenishSum() {
+    private ReplenishCash() {
         super(false);
     }
 
     public static State state() {
         if (state == null) {
-            state = new ReplenishSum();
+            state = new ReplenishCash();
         }
 
         return state;
@@ -33,7 +34,7 @@ public class ReplenishSum extends State {
     public State next() {
         int sum = index("Enter cash to replenish");
 
-        if (sum != -1) {
+        if (sum != ERROR) {
             int sumToReplenish = DB.replenishSum(Machine.bin, sum);
 
             out("Wait for replenishing " + sumToReplenish + "... ");

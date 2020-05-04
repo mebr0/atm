@@ -6,6 +6,7 @@ import com.mebr0.atm.state.ultra.State;
 
 import static com.mebr0.util.Printer.error;
 import static com.mebr0.util.Printer.out;
+import static com.mebr0.util.Scanner.ERROR;
 import static com.mebr0.util.Scanner.index;
 
 /**
@@ -15,17 +16,17 @@ import static com.mebr0.util.Scanner.index;
  * @author A.Yergali
  * @version 2.0
  */
-public class WithdrawSum extends State {
+public class WithdrawCash extends State {
 
     private static State state;
 
-    private WithdrawSum() {
+    private WithdrawCash() {
         super(false);
     }
 
     public static State state() {
         if (state == null) {
-            state = new WithdrawSum();
+            state = new WithdrawCash();
         }
 
         return state;
@@ -34,6 +35,10 @@ public class WithdrawSum extends State {
     @Override
     public State next() {
         int sum = index("Enter sum to withdraw");
+
+        if (sum == ERROR) {
+            return state;
+        }
 
         if (DB.checkSum(Machine.bin, sum)) {
             double sumToWithdraw = DB.withdrawSum(Machine.bin, sum);

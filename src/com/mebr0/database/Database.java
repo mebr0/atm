@@ -12,11 +12,13 @@ import java.util.List;
  * Have {@link #save()} and {@link #load()} methods
  *
  * @author A.Yergali
- * @version 2.0
+ * @version 2.1
  */
 public class Database {
 
     private static Database database = null;
+
+    public static final int ERROR_SUM = -1;
 
     private Database() {
 
@@ -67,13 +69,13 @@ public class Database {
                 orElse(null);
 
         if (account == null)
-            return -1;
+            return ERROR_SUM;
 
         if (account.canBeWithdraw(sum)) {
             return account.withdraw(sum);
         }
         else {
-            return -1;
+            return ERROR_SUM;
         }
     }
 
@@ -84,7 +86,7 @@ public class Database {
                 orElse(null);
 
         if (account == null)
-            return -1;
+            return ERROR_SUM;
 
         return account.replenish(sum);
     }
@@ -96,7 +98,7 @@ public class Database {
                 orElse(null);
 
         if (account == null)
-            return -1;
+            return ERROR_SUM;
 
         return account.getSum();
     }

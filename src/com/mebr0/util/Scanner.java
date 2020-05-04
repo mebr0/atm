@@ -13,13 +13,15 @@ import static com.mebr0.util.Printer.out;
  * Must be closed in the end of program
  *
  * @author A.Yergali
- * @version 1.0
+ * @version 1.1
  */
 public class Scanner {
 
     private static final BufferedReader input;
 
     private static final Logger LOG = Logger.getInstance();
+
+    public static final int ERROR = -1;
 
     static {
         input = new BufferedReader(new InputStreamReader(System.in));
@@ -42,7 +44,7 @@ public class Scanner {
             return Integer.parseInt(input);
         }
         catch (Exception e) {
-            return -1;
+            return ERROR;
         }
     }
 
