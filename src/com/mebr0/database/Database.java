@@ -12,7 +12,7 @@ import java.util.List;
  * Have {@link #save()} and {@link #load()} methods
  *
  * @author A.Yergali
- * @version 1.0
+ * @version 2.0
  */
 public class Database {
 
@@ -60,7 +60,7 @@ public class Database {
         return account.canBeWithdraw(sum);
     }
 
-    public double withdrawSum(String bin, int sum) {
+    public int withdrawSum(String bin, int sum) {
         Account account = accountList.stream().
                 filter(acc -> acc.getBin().equals(bin)).
                 findFirst().
@@ -75,6 +75,18 @@ public class Database {
         else {
             return -1;
         }
+    }
+
+    public int replenishSum(String bin, int sum) {
+        Account account = accountList.stream().
+                filter(acc -> acc.getBin().equals(bin)).
+                findFirst().
+                orElse(null);
+
+        if (account == null)
+            return -1;
+
+        return account.replenish(sum);
     }
 
     public double getSum(String bin) {

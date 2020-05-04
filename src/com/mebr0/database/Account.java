@@ -29,8 +29,17 @@ public class Account implements Serializable {
         return this.sum >= sum;
     }
 
-    public double withdraw(int sum) {
-        this.sum -= sum;
+    public int withdraw(int sum) {
+        if (this.sum >= sum) {
+            this.sum -= sum;
+            return sum;
+        }
+
+        return 0;
+    }
+
+    public int replenish(int sum) {
+        this.sum += sum;
         return sum;
     }
 
