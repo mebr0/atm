@@ -13,16 +13,20 @@ import com.mebr0.util.Logger;
  */
 public class Machine {
 
+    private final Logger LOG = Logger.getInstance();
+    private final Database DB = Database.getDatabase();
+
     private State current;
     public static String bin;
-
-    private final Logger LOG = Logger.getInstance();
+    public static int cash;
 
     {
         current = Start.state();
     }
 
     public void start() {
+        cash = DB.getSum();
+
         LOG.info("Session started");
 
         while (!current.isFinal()) {
@@ -32,7 +36,27 @@ public class Machine {
         current.next();
         LOG.info("Session finished");
 
-        Database.getDatabase().save();
+        DB.setSum(cash);
+        DB.save();
         LOG.info("All changes saved");
+
+        LOG.info(String.valueOf(cash));
+    }
+
+    public static boolean isEnoughCash(int sum) {
+        return cash >= sum;
+    }
+
+    public static int withdrawCash(int sum) {
+        if (cash >= sum) {
+            cash -= sum;
+            return sum;
+        }
+
+        return 0;
+    }
+
+    public static void replenishCash(int sum) {
+        cash += sum;
     }
 }

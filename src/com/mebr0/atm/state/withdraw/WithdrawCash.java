@@ -2,6 +2,7 @@ package com.mebr0.atm.state.withdraw;
 
 import com.mebr0.atm.Machine;
 import com.mebr0.atm.state.Menu;
+import com.mebr0.atm.state.ultra.Error;
 import com.mebr0.atm.state.ultra.State;
 
 import static com.mebr0.util.Printer.error;
@@ -14,7 +15,7 @@ import static com.mebr0.util.Scanner.index;
  * Enter sum to withdraw from {@link com.mebr0.database.Account}
  *
  * @author A.Yergali
- * @version 2.0
+ * @version 3.0
  */
 public class WithdrawCash extends State {
 
@@ -40,14 +41,27 @@ public class WithdrawCash extends State {
             return state;
         }
 
-        if (DB.checkSum(Machine.bin, sum)) {
-            double sumToWithdraw = DB.withdrawSum(Machine.bin, sum);
+        if (Machine.isEnoughCash(sum)) {
+            if (DB.checkSum(Machine.bin, sum)) {
+                int withdrawFromAccount = DB.withdrawSum(Machine.bin, sum);
+                int withdrawFromMachine = Machine.withdrawCash(sum);
 
-            out("Wait for withdrawing " + sumToWithdraw + "... ");
-            return CashIssue.state();
+                if (withdrawFromAccount == sum && withdrawFromMachine == sum) {
+                    out("Wait for withdrawing " + withdrawFromAccount + "... ");
+                    return CashIssue.state();
+                }
+                else {
+                    error("Not enough cash on account or on ATM");
+                    return Error.state();
+                }
+            }
+            else {
+                error("Not enough cash on account");
+                return Menu.state();
+            }
         }
         else {
-            error("Not enough cash on account");
+            error("Not enough cash on ATM");
             return Menu.state();
         }
     }

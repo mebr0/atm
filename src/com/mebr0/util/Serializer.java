@@ -35,6 +35,23 @@ public class Serializer {
         return false;
     }
 
+    public static <T> T deserialize(String file, Class<T> clazz) {
+        try (ObjectInputStream stream = new ObjectInputStream(new FileInputStream(PREFIX + file))) {
+            return (T) stream.readObject();
+        }
+        catch (ClassNotFoundException e) {
+            LOG.error(PREFIX + file + " class not found");
+        }
+        catch (FileNotFoundException e) {
+            LOG.error(PREFIX + file + " not found");
+        }
+        catch (IOException e) {
+            LOG.error(PREFIX + file + " io exception");
+        }
+
+        return null;
+    }
+
     public static <T> List<T> deserializeList(String file, Class<T> clazz) {
         try (ObjectInputStream stream = new ObjectInputStream(new FileInputStream(PREFIX + file))) {
             return (ArrayList<T>) stream.readObject();

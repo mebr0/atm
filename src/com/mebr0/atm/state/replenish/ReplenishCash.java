@@ -1,8 +1,10 @@
 package com.mebr0.atm.state.replenish;
 
 import com.mebr0.atm.Machine;
+import com.mebr0.atm.state.ultra.Error;
 import com.mebr0.atm.state.ultra.State;
 
+import static com.mebr0.util.Printer.error;
 import static com.mebr0.util.Printer.out;
 import static com.mebr0.util.Scanner.ERROR;
 import static com.mebr0.util.Scanner.index;
@@ -12,7 +14,7 @@ import static com.mebr0.util.Scanner.index;
  * Enter sum to replenish to {@link com.mebr0.database.Account}
  *
  * @author A.Yergali
- * @version 1.0
+ * @version 2.0
  */
 public class ReplenishCash extends State {
 
@@ -35,10 +37,17 @@ public class ReplenishCash extends State {
         int sum = index("Enter cash to replenish");
 
         if (sum != ERROR) {
-            int sumToReplenish = DB.replenishSum(Machine.bin, sum);
+            int replenishToAccount = DB.replenishSum(Machine.bin, sum);
+            Machine.replenishCash(sum);
 
-            out("Wait for replenishing " + sumToReplenish + "... ");
-            return ReplenishTransaction.state();
+            if (replenishToAccount == sum) {
+                out("Wait for replenishing " + replenishToAccount + "... ");
+                return ReplenishTransaction.state();
+            }
+            else {
+                error("Error occurred while replenishing");
+                return Error.state();
+            }
         }
         else {
             return state;
