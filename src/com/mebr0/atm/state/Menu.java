@@ -1,9 +1,10 @@
 package com.mebr0.atm.state;
 
 import com.mebr0.atm.state.account.CheckAccount;
+import com.mebr0.atm.state.replenish.ReplenishCash;
 import com.mebr0.atm.state.ultra.Halt;
 import com.mebr0.atm.state.ultra.State;
-import com.mebr0.atm.state.withdraw.WithdrawSum;
+import com.mebr0.atm.state.withdraw.WithdrawCash;
 
 import static com.mebr0.util.Printer.*;
 import static com.mebr0.util.Scanner.index;
@@ -33,8 +34,8 @@ public class Menu extends State {
 
     @Override
     public State next() {
-        String[] options = { "Withdraw", "Check cash", "Exit" };
-        State[] states = { WithdrawSum.state(), CheckAccount.state(), Halt.state() };
+        String[] options = { "Withdraw", "Check cash", "Replenish", "Exit" };
+        State[] states = { WithdrawCash.state(), CheckAccount.state(), ReplenishCash.state(), Halt.state() };
 
         print("Choose option");
         options(options);
