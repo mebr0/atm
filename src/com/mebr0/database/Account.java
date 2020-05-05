@@ -7,7 +7,7 @@ import java.util.Objects;
  * Entity class for bank accounts
  *
  * @author A.Yergali
- * @version 1.0
+ * @version 2.0
  */
 public class Account implements Serializable {
 
@@ -25,11 +25,11 @@ public class Account implements Serializable {
         return this.bin.equals(bin) && this.pin.equals(pin);
     }
 
-    public boolean canBeWithdraw(int sum) {
+    public boolean canBeWithdraw(double sum) {
         return this.sum >= sum;
     }
 
-    public int withdraw(int sum) {
+    public double withdraw(double sum) {
         if (this.sum >= sum) {
             this.sum -= sum;
             return sum;
@@ -38,7 +38,7 @@ public class Account implements Serializable {
         return 0;
     }
 
-    public int replenish(int sum) {
+    public double replenish(double sum) {
         this.sum += sum;
         return sum;
     }

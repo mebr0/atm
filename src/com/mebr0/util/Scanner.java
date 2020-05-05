@@ -13,7 +13,7 @@ import static com.mebr0.util.Printer.out;
  * Must be closed in the end of program
  *
  * @author A.Yergali
- * @version 1.1
+ * @version 1.3
  */
 public class Scanner {
 
@@ -42,6 +42,22 @@ public class Scanner {
 
         try {
             return Integer.parseInt(input);
+        }
+        catch (Exception e) {
+            return ERROR;
+        }
+    }
+
+    public static double number(String text) {
+        out(text + ": ");
+        return number();
+    }
+
+    public static double number() {
+        String input = input();
+
+        try {
+            return Double.parseDouble(input);
         }
         catch (Exception e) {
             return ERROR;

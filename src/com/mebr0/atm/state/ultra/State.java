@@ -16,13 +16,16 @@ public abstract class State {
     private final String id;
     private final boolean isFinal;
 
-    protected final Database DB;
-    protected final Logger LOG;
+    protected final static Database DB;
+    protected final static Logger LOG;
+
+    static {
+        DB = Database.getDatabase();
+        LOG = Logger.getInstance();
+    }
 
     {
         id = UUID.randomUUID().toString();
-        DB = Database.getDatabase();
-        LOG = Logger.getInstance();
     }
 
     public State(boolean isFinal) {

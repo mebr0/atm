@@ -17,6 +17,7 @@ public class Machine {
     private final Database DB = Database.getDatabase();
 
     private State current;
+
     public static String bin;
     public static int cash;
 
@@ -39,8 +40,6 @@ public class Machine {
         DB.setSum(cash);
         DB.save();
         LOG.info("All changes saved");
-
-        LOG.info(String.valueOf(cash));
     }
 
     public static boolean isEnoughCash(int sum) {

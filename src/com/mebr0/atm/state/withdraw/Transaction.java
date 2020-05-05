@@ -11,22 +11,22 @@ import static com.mebr0.util.Printer.print;
 
 /**
  * Intermediate state of {@link com.mebr0.atm.Machine}
- * Issue cash from {@link com.mebr0.database.Account}
+ * Withdraw transaction for {@link com.mebr0.database.Account}
  *
  * @author A.Yergali
  * @version 2.0
  */
-public class CashIssue extends State {
+public class Transaction extends State {
 
     private static State state;
 
-    private CashIssue() {
+    private Transaction() {
         super(false);
     }
 
-    public static State state() {
+    static State state() {
         if (state == null) {
-            state = new CashIssue();
+            state = new Transaction();
         }
 
         return state;

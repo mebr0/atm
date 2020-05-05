@@ -53,7 +53,7 @@ public class Database {
                 anyMatch(account -> account.login(bin, pin));
     }
 
-    public boolean checkSum(String bin, int sum) {
+    public boolean checkSum(String bin, double sum) {
         Account account = accountList.stream().
                 filter(acc -> acc.getBin().equals(bin)).
                 findFirst().
@@ -65,24 +65,19 @@ public class Database {
         return account.canBeWithdraw(sum);
     }
 
-    public int withdrawSum(String bin, int sum) {
+    public double withdrawSum(String bin, double sum) {
         Account account = accountList.stream().
                 filter(acc -> acc.getBin().equals(bin)).
                 findFirst().
                 orElse(null);
 
-        if (account == null)
+        if (account == null || !account.canBeWithdraw(sum))
             return ERROR_SUM;
 
-        if (account.canBeWithdraw(sum)) {
-            return account.withdraw(sum);
-        }
-        else {
-            return ERROR_SUM;
-        }
+        return account.withdraw(sum);
     }
 
-    public int replenishSum(String bin, int sum) {
+    public double replenishSum(String bin, int sum) {
         Account account = accountList.stream().
                 filter(acc -> acc.getBin().equals(bin)).
                 findFirst().
@@ -104,6 +99,31 @@ public class Database {
             return ERROR_SUM;
 
         return account.getSum();
+    }
+
+    public boolean accountExists(String bin) {
+        return accountList.stream().
+                anyMatch(account -> account.getBin().equals(bin));
+    }
+
+    public double transfer(String bin, String otherBin, double sum) {
+        Account account = accountList.stream().
+                filter(acc -> acc.getBin().equals(bin)).
+                findFirst().
+                orElse(null);
+
+        Account otherAccount = accountList.stream().
+                filter(acc -> acc.getBin().equals(otherBin)).
+                findFirst().
+                orElse(null);
+
+        if (account == null || otherAccount == null || !account.canBeWithdraw(sum))
+            return ERROR_SUM;
+
+        account.withdraw(sum);
+        otherAccount.replenish(sum);
+
+        return sum;
     }
 
     public int getSum() {

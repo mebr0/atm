@@ -17,17 +17,17 @@ import static com.mebr0.util.Scanner.index;
  * @author A.Yergali
  * @version 3.0
  */
-public class WithdrawCash extends State {
+public class Withdraw extends State {
 
     private static State state;
 
-    private WithdrawCash() {
+    private Withdraw() {
         super(false);
     }
 
     public static State state() {
         if (state == null) {
-            state = new WithdrawCash();
+            state = new Withdraw();
         }
 
         return state;
@@ -43,12 +43,12 @@ public class WithdrawCash extends State {
 
         if (Machine.isEnoughCash(sum)) {
             if (DB.checkSum(Machine.bin, sum)) {
-                int withdrawFromAccount = DB.withdrawSum(Machine.bin, sum);
+                int withdrawFromAccount = (int) DB.withdrawSum(Machine.bin, sum);
                 int withdrawFromMachine = Machine.withdrawCash(sum);
 
                 if (withdrawFromAccount == sum && withdrawFromMachine == sum) {
                     out("Wait for withdrawing " + withdrawFromAccount + "... ");
-                    return CashIssue.state();
+                    return Transaction.state();
                 }
                 else {
                     error("Not enough cash on account or on ATM");

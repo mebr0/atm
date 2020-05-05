@@ -11,22 +11,22 @@ import static com.mebr0.util.Printer.print;
 
 /**
  * Intermediate state of {@link com.mebr0.atm.Machine}
- * Issue cash from {@link com.mebr0.database.Account}
+ * Replenish transaction for {@link com.mebr0.database.Account}
  *
  * @author A.Yergali
  * @version 1.0
  */
-public class ReplenishTransaction extends State {
+public class Transaction extends State {
 
     private static State state;
 
-    private ReplenishTransaction() {
+    private Transaction() {
         super(false);
     }
 
     public static State state() {
         if (state == null) {
-            state = new ReplenishTransaction();
+            state = new Transaction();
         }
 
         return state;
@@ -39,7 +39,7 @@ public class ReplenishTransaction extends State {
         try {
             Thread.sleep(delay * 1000);
 
-            print("Cash issued");
+            print("Account replenished");
             return Menu.state();
         }
         catch (InterruptedException e) {
