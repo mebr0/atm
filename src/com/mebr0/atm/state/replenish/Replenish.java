@@ -16,17 +16,17 @@ import static com.mebr0.util.Scanner.index;
  * @author A.Yergali
  * @version 2.0
  */
-public class ReplenishCash extends State {
+public class Replenish extends State {
 
     private static State state;
 
-    private ReplenishCash() {
+    private Replenish() {
         super(false);
     }
 
     public static State state() {
         if (state == null) {
-            state = new ReplenishCash();
+            state = new Replenish();
         }
 
         return state;
@@ -37,12 +37,12 @@ public class ReplenishCash extends State {
         int sum = index("Enter cash to replenish");
 
         if (sum != ERROR) {
-            int replenishToAccount = DB.replenishSum(Machine.bin, sum);
+            int replenishToAccount = (int) DB.replenishSum(Machine.bin, sum);
             Machine.replenishCash(sum);
 
             if (replenishToAccount == sum) {
                 out("Wait for replenishing " + replenishToAccount + "... ");
-                return ReplenishTransaction.state();
+                return Transaction.state();
             }
             else {
                 error("Error occurred while replenishing");

@@ -26,6 +26,6 @@ public class Printer {
     }
 
     public static void error(String text) {
-        System.err.println(text);
+        System.out.println("ERROR -> " + text);
     }
 }
