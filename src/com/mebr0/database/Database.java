@@ -13,7 +13,7 @@ import java.util.List;
  * Have {@link #save()} and {@link #load()} methods
  *
  * @author A.Yergali
- * @version 2.1
+ * @version 2.2
  */
 public class Database {
 
@@ -38,14 +38,7 @@ public class Database {
 
     {
         load();
-
-        if (accountList == null) {
-            accountList = new ArrayList<>();
-
-            accountList.add(new Account("121212121212", "1234", 32222));
-            accountList.add(new Account("123123123123", "1234", 32222));
-            accountList.add(new Account("123412341234", "1234", 32222));
-        }
+        checkList();
     }
 
     public boolean login(String bin, String pin) {
@@ -134,18 +127,29 @@ public class Database {
         this.sum.value = sum;
     }
 
+    private void checkList() {
+        if (accountList == null) {
+            accountList = new ArrayList<>();
+
+            accountList.add(new Account("121212121212", "1234", 32222));
+            accountList.add(new Account("123123123123", "1234", 32222));
+            accountList.add(new Account("123412341234", "1234", 32222));
+        }
+    }
+
     private void load() {
         accountList = Serializer.deserializeList("accounts.out", Account.class);
         sum = Serializer.deserialize("sum.out", Sum.class);
+
+        checkList();
 
         if (sum == null || Sum.MIN_LIMIT > sum.value) {
             sum = new Sum();
         }
     }
 
-    public void save() {
-        Serializer.serialize("accounts.out", accountList);
-        Serializer.serialize("sum.out", sum);
+    public boolean save() {
+        return Serializer.serialize("accounts.out", accountList) && Serializer.serialize("sum.out", sum);
     }
 
     /**

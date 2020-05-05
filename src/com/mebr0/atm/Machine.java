@@ -38,7 +38,10 @@ public class Machine {
         LOG.info("Session finished");
 
         DB.setSum(cash);
-        DB.save();
+
+        if (!DB.save())
+            LOG.error("Could not save database");
+
         LOG.info("All changes saved");
     }
 
