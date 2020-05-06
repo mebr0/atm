@@ -9,7 +9,7 @@ import java.time.format.DateTimeFormatter;
  * Logger class
  *
  * @author A.Yergali
- * @version 1.0
+ * @version 2.0
  */
 public class Logger {
 
@@ -48,7 +48,7 @@ public class Logger {
         message = now() + " [" + Thread.currentThread().getId() + "] [ERROR] " + message;
 
         writeToFile(message);
-        System.err.println(message);
+        System.out.println(message);
     }
 
     /**
@@ -59,7 +59,7 @@ public class Logger {
             writer.write(message + '\n');
         }
         catch (IOException e) {
-            System.err.println("Cannot log to file");
+            System.out.println("Cannot log to file");
         }
     }
 

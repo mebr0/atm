@@ -22,9 +22,18 @@ public class Scanner {
     private static final Logger LOG = Logger.getInstance();
 
     public static final int ERROR = -1;
+    private static final String PIN_REGEX = "[0-9]{4}";
 
     static {
         input = new BufferedReader(new InputStreamReader(System.in));
+    }
+
+    public static String pin(String text) {
+        out(text + ": ");
+
+        String pin = input();
+
+        return pin.matches(PIN_REGEX) ? pin : "";
     }
 
     public static String ask(String text) {

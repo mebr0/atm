@@ -1,6 +1,7 @@
 package com.mebr0.atm.state;
 
 import com.mebr0.atm.state.account.CheckAccount;
+import com.mebr0.atm.state.pin.ChangePin;
 import com.mebr0.atm.state.replenish.Replenish;
 import com.mebr0.atm.state.transfer.Transfer;
 import com.mebr0.atm.state.ultra.Halt;
@@ -15,7 +16,7 @@ import static com.mebr0.util.Scanner.index;
  * Menu contains all options of ATM
  *
  * @author A.Yergali
- * @version 2.0
+ * @version 3.0
  */
 public class Menu extends State {
 
@@ -35,8 +36,9 @@ public class Menu extends State {
 
     @Override
     public State next() {
-        String[] options = { "Withdraw", "Check cash", "Replenish", "Transfer", "Exit" };
-        State[] states = { Withdraw.state(), CheckAccount.state(), Replenish.state(), Transfer.state(), Halt.state() };
+        String[] options = { "Withdraw", "Check cash", "Replenish", "Transfer", "Change pin", "Exit" };
+        State[] states = { Withdraw.state(), CheckAccount.state(), Replenish.state(), Transfer.state(),
+                ChangePin.state(), Halt.state() };
 
         print("Choose option");
         options(options);
