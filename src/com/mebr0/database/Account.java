@@ -1,5 +1,7 @@
 package com.mebr0.database;
 
+import com.mebr0.util.Encoder;
+
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -7,22 +9,26 @@ import java.util.Objects;
  * Entity class for bank accounts
  *
  * @author A.Yergali
- * @version 2.0
+ * @version 3.0
  */
 public class Account implements Serializable {
 
     private final String bin;
-    private final String pin;
+    private String pin;
     private double sum;
 
     public Account(String bin, String pin, double sum) {
         this.bin = bin;
-        this.pin = pin;
+        this.pin = Encoder.encode(pin);
         this.sum = sum;
     }
 
+    private boolean pinEquals(String pin) {
+        return Encoder.encode(pin).equals(this.pin);
+    }
+
     public boolean login(String bin, String pin) {
-        return this.bin.equals(bin) && this.pin.equals(pin);
+        return this.bin.equals(bin) && this.pinEquals(pin);
     }
 
     public boolean canBeWithdraw(double sum) {
@@ -47,8 +53,8 @@ public class Account implements Serializable {
         return bin;
     }
 
-    public String getPin() {
-        return pin;
+    public void setPin(String pin) {
+        this.pin = Encoder.encode(pin);
     }
 
     public double getSum() {

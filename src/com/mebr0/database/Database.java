@@ -127,6 +127,20 @@ public class Database {
         this.sum.value = sum;
     }
 
+    public boolean changePin(String bin, String newPin) {
+        Account account = accountList.stream().
+                filter(acc -> acc.getBin().equals(bin)).
+                findFirst().
+                orElse(null);
+
+        if (account == null)
+            return false;
+
+        account.setPin(newPin);
+
+        return true;
+    }
+
     private void checkList() {
         if (accountList == null) {
             accountList = new ArrayList<>();
