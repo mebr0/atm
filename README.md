@@ -9,33 +9,48 @@ Written on Java with Polymorphism form (states == classes)
 
 #### States
 
+##### Start
+* s - request PIN
+
+##### Finish
 * h - session finished
 * e - session finished with error
-* q<sub>0</sub> - request PIN
-* q<sub>1</sub> - choose option in main menu
+
+##### Intermediate
+* q<sub>0</sub> - choose option in main menu
+* q<sub>1</sub> - making transaction
 * q<sub>2</sub> - enter sum to withdraw
-* q<sub>3</sub> - making transaction
-* q<sub>4</sub> - output account cash
-* q<sub>5</sub> - enter cash to replenish
-* q<sub>6</sub> - enter sum and account to transfer
+* q<sub>3</sub> - output account cash
+* q<sub>4</sub> - enter cash to replenish
+* q<sub>5</sub> - enter sum and account to transfer
+* q<sub>6</sub> - enter a pin to change
 
 #### Actions
 
-* z<sub>0</sub> - choosing invalid option
-* z<sub>1</sub> - finishing session
-* z<sub>2</sub> - correct PIN
-* z<sub>3</sub> - choosing to withdraw cash
-* z<sub>4</sub> - asserting withdrawing
-* z<sub>5</sub> - returning to menu
-* z<sub>6</sub> - checking account
-* z<sub>7</sub> - choosing to replenish cash
-* z<sub>8</sub> - asserting replenish
-* z<sub>9</sub> - enter sum again
-* z<sub>10</sub> - choosing to transfer sum
-* z<sub>11</sub> - asserting transfer
-* z<sub>12</sub> - enter account again
-* z<sub>99</sub> - system error
-* z<sub>100</sub> - wrong PIN
+#### Pins
+* p<sub>0</sub> - wrong PIN
+* p<sub>1</sub> - correct PIN
+
+#### Menu
+* m<sub>0</sub> - returning to menu
+* m<sub>1</sub> - choosing invalid option at menu
+
+#### Finishing
+* e<sub>0</sub> - finishing session
+* e<sub>1</sub> - system error
+
+#### Other
+* z<sub>0</sub> - choosing to withdraw cash
+* z<sub>1</sub> - asserting withdrawing
+* z<sub>2</sub> - checking account
+* z<sub>3</sub> - choosing to replenish cash
+* z<sub>4</sub> - asserting replenish
+* z<sub>5</sub> - enter sum again
+* z<sub>6</sub> - choosing to transfer sum
+* z<sub>7</sub> - asserting transfer
+* z<sub>8</sub> - enter account again
+* z<sub>9</sub> - choosing change pin
+* z<sub>10</sub> - enter a pin again (wrong pin)
 
 #### JSON schema
 

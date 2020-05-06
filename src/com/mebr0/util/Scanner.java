@@ -13,9 +13,9 @@ import static com.mebr0.util.Printer.out;
  * Must be closed in the end of program
  *
  * @author A.Yergali
- * @version 1.3
+ * @version 2.0
  */
-public class Scanner {
+public abstract class Scanner {
 
     private static final BufferedReader input;
 
@@ -23,6 +23,10 @@ public class Scanner {
 
     public static final int ERROR = -1;
     private static final String PIN_REGEX = "[0-9]{4}";
+
+    private Scanner() {
+        throw new AssertionError("No " + getClass().getSimpleName() + " instances for you!");
+    }
 
     static {
         input = new BufferedReader(new InputStreamReader(System.in));

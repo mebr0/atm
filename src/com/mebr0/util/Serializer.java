@@ -9,13 +9,17 @@ import java.util.List;
  * Files for saving stored in {@link #PREFIX} directory
  *
  * @author A.Yergali
- * @version 1.0
+ * @version 2.0
  */
-public class Serializer {
+public abstract class Serializer {
 
     private static final String PREFIX = "db/";
 
     private static final Logger LOG = Logger.getInstance();
+
+    private Serializer() {
+        throw new AssertionError("No " + getClass().getSimpleName() + " instances for you!");
+    }
 
     public static boolean serialize(String file, Object object) {
         try (ObjectOutputStream stream = new ObjectOutputStream(new FileOutputStream(PREFIX + file))) {

@@ -7,9 +7,13 @@ import java.util.stream.IntStream;
  * Only static methods
  *
  * @author A.Yergali
- * @version 1.0
+ * @version 2.0
  */
-public class Printer {
+public abstract class Printer {
+
+    private Printer() {
+        throw new AssertionError("No " + getClass().getSimpleName() + " instances for you!");
+    }
 
     public static void options(String... texts) {
         IntStream.range(0, texts.length).
