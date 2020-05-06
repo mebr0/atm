@@ -1,7 +1,19 @@
 ## ATM on FSM
 
-Simple example of Finite-State Machines with on Automated Teller Machine of some Bank.
-Written on Java with Polymorphism form (states == classes)
+Simple example of Finite-State Machines on Automated Teller Machine of some Bank
+
+Written on Java with Polymorphism form
+
+### Main idea
+
+Inspired by course of [Program Principles 2](https://github.com/MeBr0/ProgrammingPrinciples2)
+by [@Beisenbek](https://github.com/Beisenbek)
+
+Return to the idea of FSM after two years :)
+
+All states are _singleton classes_ with access to database and machine data. 
+Have [.next()]() method for each state. 
+Only some states are final.
 
 ### FSM schema
 
@@ -27,19 +39,19 @@ Written on Java with Polymorphism form (states == classes)
 
 #### Actions
 
-#### Pins
+##### Pins
 * p<sub>0</sub> - wrong PIN
 * p<sub>1</sub> - correct PIN
 
-#### Menu
+##### Menu
 * m<sub>0</sub> - returning to menu
 * m<sub>1</sub> - choosing invalid option at menu
 
-#### Finishing
+##### Finishing
 * e<sub>0</sub> - finishing session
 * e<sub>1</sub> - system error
 
-#### Other
+##### Other
 * z<sub>0</sub> - choosing to withdraw cash
 * z<sub>1</sub> - asserting withdrawing
 * z<sub>2</sub> - checking account
