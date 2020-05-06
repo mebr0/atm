@@ -9,7 +9,7 @@ import com.mebr0.util.Logger;
  * Class for imitating ATM based on FSM {@link State}s
  *
  * @author A.Yergali
- * @version 1.0
+ * @version 2.0
  */
 public class Machine {
 
